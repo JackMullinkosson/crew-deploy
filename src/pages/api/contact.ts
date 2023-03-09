@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
-import { transporter } from "@/app/Components/NodeMailer";
+import { transporter } from "../../../Components/NodeMailer";
 const email = process.env.EMAIL;
 
 export default async function handler(
