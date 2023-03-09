@@ -11,15 +11,22 @@ interface User {
 
 export default function Home() {
   const [user, setUser] = useState<User>();
+  const [loading, setLoading] = useState(true);
+
   async function getUserById() {
-    const res = await fetch(`/api/getUserById/1`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const resUser = await res.json();
-    setUser(resUser);
+    let res;
+    try {
+      res = await fetch(`/api/getUserById/1`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const resUser = await res.json();
+      setUser(resUser);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -39,7 +46,7 @@ export default function Home() {
           href="https://i.ibb.co/4Y9YrCQ/Untitled-design-24-removebg-preview.png"
         />
       </Head>
-      <h1>Hello, {user.name}!</h1>
+      {loading ? null : <h1>Hello, {user.name}!</h1>}
     </>
   );
 }
