@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  name     String
+  email    String    @unique
+  id       Int       @id @default(autoincrement())
+  projects Project[]
+  goTos    GoTos[]
+}
+
+model Project {
+  name       String
+  ownerId    Int
+  id         Int      @id @default(autoincrement())
+  endDate    DateTime @default(dbgenerated("'0001-01-01 00:00:00'::timestamp without time zone"))
+  logLine    String
+  startDate  DateTime @default(dbgenerated("'0001-01-01 00:00:00'::timestamp without time zone"))
+  dayDetails Day[]
+  goTos      GoTos[]
+  owner      User     @relation(fields: [ownerId], references: [id])
+  crewedUp   Boolean  @default(false)
+}
+
+model Day {
+  id        Int      @id @default(autoincrement())
+  projectId Int
+  startTime DateTime @default(dbgenerated("'0001-01-01 00:00:00'::timestamp without time zone"))
+  endTime   DateTime @default(dbgenerated("'0001-01-01 00:00:00'::timestamp without time zone"))
+  location  String
+  project   Project  @relation(fields: [projectId], references: [id])
+}
+
+model Person {
+  name        String
+  order       Int    @default(autoincrement())
+  id          String @id @default(uuid())
+  email       String
+  phoneNumber String
+  status      String?
+  statusIcon  Int?
+  roleId      Int
+  goToId      Int
+  goTo        GoTos  @relation(fields: [goToId], references: [id])
+  role        Role   @relation(fields: [roleId], references: [id])
+}
+
+model GoTos {
+  id          Int      @id @default(autoincrement())
+  name        String
+  icon        Int      @default(1)
+  defaultGoTo Boolean  @default(true)
+  ownerId     Int
+  owner       User     @relation(fields: [ownerId], references: [id])
+  projectId   Int?
+  project     Project? @relation(fields: [projectId], references: [id])
+  people      Person[]
+  roles       Role[]
+}
+
+model Role {
+  name   String
+  id     Int      @id @default(autoincrement())
+  goToId Int
+  people Person[]
+  goTos  GoTos    @relation(fields: [goToId], references: [id])
+
+  @@unique([id, goToId], name: "complexId")
+}
