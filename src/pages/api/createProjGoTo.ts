@@ -21,7 +21,7 @@ export default async function handler(
         defaultGoTo: defaultGoTo,
         project: {
           connect: {
-            id: projectId,
+            id: Number(projectId),
           },
         },
       },
