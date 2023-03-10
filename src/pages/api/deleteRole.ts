@@ -16,7 +16,7 @@ export default async function handler(
       where: {
         complexId: {
           id: id,
-          goToId: goToId,
+          goToId: Number(goToId),
         },
       },
     });

@@ -7,7 +7,6 @@ export default async function handler(
 ) {
   try {
     const { id } = req.query;
-    console.log(req.query);
     const project = await prisma.project.findFirst({
       where: { id: Number(id) },
       include: {

@@ -1,6 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import { PlusIcon, XMarkIcon, CheckIcon } from "@heroicons/react/24/solid";
+import {
+  PlusIcon,
+  XMarkIcon,
+  CheckIcon,
+  ExclamationCircleIcon,
+} from "@heroicons/react/24/solid";
 import React, { useState, useEffect } from "react";
 import { useGlobalContext } from "../../Context/store";
 import { ClipLoader } from "react-spinners";
@@ -15,6 +20,8 @@ const inputStyles =
   "appearance-none w-1/2 bg-gray-200 text-gray-500 border border-black-500 rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white";
 const successLabelStyles =
   "h-6 uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 flex flex-row items-center text-teal-500";
+const dangerLabelStyles =
+  "block uppercase text-red-700 text-xs font-bold mb-2 flex flex-row items-center";
 const successButtonStyles =
   "flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed";
 const infoButtonStyles =
@@ -32,6 +39,8 @@ const Assigned = ({ id }) => {
     isPosting,
     project,
     setProject,
+    error,
+    setError,
   } = useGlobalContext();
   const [goToLoading, setGoToLoading] = useState(true);
   const [isCreatingRow, setIsCreatingRow] = useState(false);
@@ -98,7 +107,8 @@ const Assigned = ({ id }) => {
     let res;
     let goTo;
     let shouldFetch = true;
-    while (shouldFetch) {
+    let tries = 0;
+    while (shouldFetch && tries < 3) {
       try {
         res = await fetch(`/api/getGoToByProjectId/${id}`, {
           method: "GET",
@@ -115,7 +125,7 @@ const Assigned = ({ id }) => {
           goTo.people.length > 0
         ) {
           shouldFetch = false;
-        }
+        } else tries++;
       } catch (e) {
         console.error(e);
       }
@@ -240,9 +250,14 @@ const Assigned = ({ id }) => {
         <>
           <div className={newRowStyles}>
             {isPosting ? (
-              <div className="flex ml-4 items-center">
-                <ClipLoader size={35} color={"black"} />
+              <div className="flex items-center">
+                <ClipLoader size={35} color={"red"} />
               </div>
+            ) : error ? (
+              <label className={dangerLabelStyles}>
+                Error occurred. Please refresh the page
+                <ExclamationCircleIcon className="h-6 w-6 items-center" />
+              </label>
             ) : (
               <label className={successLabelStyles}>
                 All changes saved

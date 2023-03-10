@@ -37,6 +37,7 @@ const RoleDetails = ({ id, roleName, goToId }) => {
     setNoEditing,
     setIsPosting,
     isPosting,
+    setError,
   } = useGlobalContext();
   const [isViewingRole, setIsViewingRole] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
@@ -130,6 +131,7 @@ const RoleDetails = ({ id, roleName, goToId }) => {
       status: null,
       statusIcon: null,
     };
+    console.log(newPerson);
     let updatedPeople = [...people];
     updatedPeople = [...people, newPerson];
     setPeople(updatedPeople);
@@ -196,14 +198,9 @@ const RoleDetails = ({ id, roleName, goToId }) => {
       });
     } catch (e) {
       console.error(e);
+      setIsPosting(false);
+      setError(true);
     } finally {
-      const resRole = await res.json();
-      let resPeople = [...people];
-      let resRoles = [...roles];
-      resRoles = resRoles.filter((i) => i.id !== resRole.id);
-      resPeople = resPeople.filter((i) => i.roleId !== resRole.id);
-      setPeople(resPeople);
-      setRoles(resRoles);
       setIsPosting(false);
     }
   }

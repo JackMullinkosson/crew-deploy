@@ -32,14 +32,14 @@ const ProjectDetails = () => {
         </p>
       </div>
       {isViewingDetails ? (
-        <>
+        <div className="bg-gray-100 rounded py-4 px-4">
           <div className="w-3/4 py-6 flex flex-row items-center shrink-0 grow-0 justify-between">
-            <h4 className="text-xl text-gray-700 font-bold w-1/3">Logline:</h4>
+            <h4 className="text-l text-gray-700 font-bold w-1/3">Logline:</h4>
             <p className="mr-0 ml-auto w-2/3">{project.logLine}</p>
           </div>
           {project.dayDetails.map((day, index) => {
             return (
-              <>
+              <div key={index}>
                 <div className="w-3/4 py-6 flex flex-row items-center justify-between shrink-0 grow-0">
                   <div className="flex flex-col justify-center items-center">
                     <h5 className="text-l font-bold text-gray-700">
@@ -66,10 +66,10 @@ const ProjectDetails = () => {
                     <p>{day.location}</p>
                   </div>
                 </div>
-              </>
+              </div>
             );
           })}
-        </>
+        </div>
       ) : null}
     </>
   );

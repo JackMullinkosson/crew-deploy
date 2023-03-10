@@ -2,7 +2,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useGlobalContext } from "../../../../Context/store";
-import { PlusIcon, XMarkIcon, CheckIcon } from "@heroicons/react/24/solid";
+import {
+  PlusIcon,
+  XMarkIcon,
+  CheckIcon,
+  ExclamationCircleIcon,
+} from "@heroicons/react/24/solid";
 import { ClipLoader } from "react-spinners";
 import RoleDetails from "../../../../Components/RoleDetails";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
@@ -18,12 +23,21 @@ const inputStyles =
   "w-1/2 appearance-none bg-gray-200 text-gray-500 border border-black-500 rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white";
 const successLabelStyles =
   "h-6 uppercase tracking-wide text-gray-700 text-xs font-bold flex flex-row items-center text-teal-500";
+const dangerLabelStyles =
+  "block uppercase text-red-700 text-xs font-bold mb-2 flex flex-row items-center";
 
 export default withPageAuthRequired(function GoTo() {
   const router = useRouter();
   const { id } = router.query;
-  const { roles, setRoles, setPeople, isPosting, setIsPosting } =
-    useGlobalContext();
+  const {
+    roles,
+    setRoles,
+    setPeople,
+    isPosting,
+    setIsPosting,
+    error,
+    setError,
+  } = useGlobalContext();
   const [goToLoading, setGoToLoading] = useState(true);
   const [isCreatingRow, setIsCreatingRow] = useState(false);
   const [tempId, setTempId] = useState<number>();
@@ -93,7 +107,7 @@ export default withPageAuthRequired(function GoTo() {
         },
         body: JSON.stringify({
           name: name,
-          goToId: id,
+          goToId: Number(id),
         }),
       });
     } catch (error) {
@@ -134,6 +148,11 @@ export default withPageAuthRequired(function GoTo() {
               <div className="flex items-center">
                 <ClipLoader size={35} color={"red"} />
               </div>
+            ) : error ? (
+              <label className={dangerLabelStyles}>
+                Error occurred. Please refresh the page
+                <ExclamationCircleIcon className="h-6 w-6 items-center" />
+              </label>
             ) : (
               <label className={successLabelStyles}>
                 All changes saved
@@ -148,7 +167,7 @@ export default withPageAuthRequired(function GoTo() {
                   key={String(role.id)}
                   id={role.id}
                   roleName={role.name}
-                  goToId={id}
+                  goToId={Number(id)}
                 />
               );
           })}

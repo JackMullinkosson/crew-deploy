@@ -30,39 +30,6 @@ interface Props {
 
 export const Container: React.FC<Props> = ({ roleId, goToId, setNoAdding }) => {
   const { people, setPeople, setIsPosting } = useGlobalContext();
-  const [dragged, setDragged] = useState<number>(-1);
-
-  useEffect(() => {
-    setDragged(-1);
-  }, []);
-
-  useEffect(() => {
-    async function updateOrder() {
-      setIsPosting(true);
-      let res;
-      try {
-        res = await fetch(`/api/reorderPeople`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            people: people,
-            roleId: roleId,
-          }),
-        });
-      } catch (e) {
-        console.error(e);
-      } finally {
-        const resPeople = await res.json();
-        setDragged(-1);
-        setPeople(resPeople);
-        setIsPosting(false);
-      }
-    }
-    if (dragged === -1) return;
-    updateOrder();
-  }, [people]);
 
   const movePerson = useCallback((dragIndex: number, hoverIndex: number) => {
     setPeople((prevPeople: PersonInterface[]) =>
@@ -73,7 +40,6 @@ export const Container: React.FC<Props> = ({ roleId, goToId, setNoAdding }) => {
         ],
       })
     );
-    setDragged(dragIndex);
   }, []);
 
   const renderPerson = useCallback(
