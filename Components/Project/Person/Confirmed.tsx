@@ -1,17 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { useGlobalContext } from "../../../Context/store";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 const dangerButtonStyles =
   "w-1/4 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-lg border-4 text-white py-1 px-2 rounded";
 
-const Confirmed = ({ ownerId, project, roleId, personId }) => {
-  const { people } = useGlobalContext();
+const Confirmed = ({ ownerId, project, roleId, personId, goToId }) => {
+  const { people, setPeople } = useGlobalContext();
   const [isConfirmingDecline, setIsConfirmingDecline] = useState(false);
   const status = "Declined";
   const statusIcon = 3;
   const [isDeclining, setIsDeclining] = useState(false);
+
+  useEffect(() => {
+    getPeople();
+  }, []);
 
   function handleCancelDecline() {
     setIsConfirmingDecline(false);
@@ -42,6 +47,21 @@ const Confirmed = ({ ownerId, project, roleId, personId }) => {
     } finally {
       setIsDeclining(false);
       window.location.reload();
+    }
+  }
+
+  async function getPeople() {
+    let res;
+    try {
+      res = await fetch(`/api/getPeopleByGoTo/${goToId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setPeople(await res.json());
+    } catch (error) {
+      console.error(error);
     }
   }
 
