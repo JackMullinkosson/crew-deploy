@@ -71,6 +71,8 @@ interface ContextProps {
   setNoEditing: Dispatch<SetStateAction<boolean>>;
   isPosting: boolean;
   setIsPosting: Dispatch<SetStateAction<boolean>>;
+  error: boolean;
+  setError: Dispatch<SetStateAction<boolean>>;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -104,6 +106,8 @@ const GlobalContext = createContext<ContextProps>({
   setNoEditing: () => {},
   isPosting: false,
   setIsPosting: () => {},
+  error: false,
+  setError: () => {},
 });
 
 export const GlobalContextProvider = ({ children }) => {
@@ -130,6 +134,7 @@ export const GlobalContextProvider = ({ children }) => {
   const [people, setPeople] = useState<Person[]>([]);
   const [noEditing, setNoEditing] = useState(false);
   const [isPosting, setIsPosting] = useState(false);
+  const [error, setError] = useState(false);
 
   return (
     <GlobalContext.Provider
@@ -148,6 +153,8 @@ export const GlobalContextProvider = ({ children }) => {
         setNoEditing,
         isPosting,
         setIsPosting,
+        error,
+        setError,
       }}
     >
       {children}

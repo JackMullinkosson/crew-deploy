@@ -58,7 +58,7 @@ export const Person: FC<PersonProps> = ({
   status,
   statusIcon,
 }) => {
-  const { people, setPeople, noEditing, setIsPosting, isPosting } =
+  const { people, setPeople, noEditing, setIsPosting, isPosting, setError } =
     useGlobalContext();
   const [isHovering, setIsHovering] = useState(false);
   const [newName, setNewName] = useState("");
@@ -169,10 +169,33 @@ export const Person: FC<PersonProps> = ({
       });
     } catch (e) {
       console.error(e);
+      setIsPosting(false);
+      setError(true);
     } finally {
-      let resPerson = await res.json();
-      let resPeople = [...people];
-      resPeople = resPeople.filter((i) => i.id !== resPerson.id);
+      setIsPosting(false);
+    }
+  }
+
+  async function updateOrder() {
+    setIsPosting(true);
+    let res;
+    try {
+      res = await fetch(`/api/reorderPeople`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          people: people,
+          roleId: roleId,
+        }),
+      });
+    } catch (e) {
+      console.error(e);
+      setIsPosting(false);
+      setError(true);
+    } finally {
+      const resPeople = await res.json();
       setPeople(resPeople);
       setIsPosting(false);
     }
@@ -213,6 +236,10 @@ export const Person: FC<PersonProps> = ({
       }
       movePerson(dragIndex, hoverIndex);
       item.index = hoverIndex;
+    },
+
+    drop() {
+      updateOrder();
     },
   });
 

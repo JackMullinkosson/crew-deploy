@@ -24,11 +24,12 @@ export default async function handler(
         },
         goTo: {
           connect: {
-            id: newPerson.goToId,
+            id: Number(newPerson.goToId),
           },
         },
       },
     });
+    console.log(person);
     return res.status(200).json(person);
   } catch (error) {
     return res.status(500).json({ error });

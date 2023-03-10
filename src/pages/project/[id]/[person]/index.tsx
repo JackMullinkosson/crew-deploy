@@ -9,8 +9,6 @@ export default async function Page() {
   const router = useRouter();
   const { id, person } = router.query;
 
-  console.log(process.env.LOCAL_DOMAIN);
-
   async function getProjectById() {
     const res = await fetch(`http://localhost:3000/api/getProjectById/${id}`, {
       method: "GET",
