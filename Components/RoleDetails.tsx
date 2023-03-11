@@ -256,7 +256,7 @@ const RoleDetails = ({ id, roleName, goToId }) => {
             <button
               className={successButtonStyles}
               onClick={() => handleCreateUserClick()}
-              disabled={noAdding || isCreatingUser}
+              disabled={isCreatingUser}
             >
               <PlusIcon className="h-6 w-6" />
               Add Go-To {roleName}
