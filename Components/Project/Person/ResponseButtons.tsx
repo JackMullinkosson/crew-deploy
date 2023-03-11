@@ -91,7 +91,7 @@ const ResponseButtons = ({ personId, project, ownerId, roleId, goToId }) => {
         {isConfirming ? <ClipLoader size={21} color={"white"} /> : "Confirm"}
       </button>
       <button
-        className={`${dangerButtonStyles}`}
+        className={dangerButtonStyles}
         onClick={() => setIsConfirmingDecline(true)}
       >
         Decline

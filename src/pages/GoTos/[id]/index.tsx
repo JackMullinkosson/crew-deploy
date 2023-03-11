@@ -127,10 +127,7 @@ export default withPageAuthRequired(function GoTo() {
       {goToLoading ? (
         <>
           <div className={newRowStyles}>
-            <button
-              className={`${successButtonStyles} disabled:cursor-not-allowed`}
-              disabled={true}
-            >
+            <button className={successButtonStyles} disabled={true}>
               <PlusIcon className="h-6 w-6" />
               Add Role
             </button>
@@ -172,7 +169,7 @@ export default withPageAuthRequired(function GoTo() {
               );
           })}
           {isCreatingRow ? (
-            <div className={`${addRowStyles} border py-6 mt-4 px-4`}>
+            <div className="border py-6 mt-4 px-4 flex flex-row w-1/4 items-center justify-between bg-white py-1 mb-4">
               <input
                 className={inputStyles}
                 value={name}
@@ -190,7 +187,7 @@ export default withPageAuthRequired(function GoTo() {
           ) : (
             <div className={newRowStyles}>
               <button
-                className={`${successButtonStyles} disabled:cursor-not-allowed flex flex-row items-center`}
+                className="flex flex-row items-center mr-2 flex items-center flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed"
                 disabled={isCreatingRow}
                 onClick={() => setIsCreatingRow(true)}
               >
