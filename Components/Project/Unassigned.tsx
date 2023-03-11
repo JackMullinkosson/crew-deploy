@@ -43,6 +43,7 @@ export default function Unassigned({ id }) {
   const [assignedGoTo, setAssignedGoTo] = useState<GoTo>();
   const [isAssigning, setIsAssigning] = useState(false);
   const [isAssigned, setIsAssigned] = useState(false);
+  const [readyToAssign, setReadyToAssign] = useState(false);
   const router = useRouter();
   const labelStyles =
     "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2";
@@ -70,6 +71,7 @@ export default function Unassigned({ id }) {
 
   function handleChoice(e) {
     const choice = goTos.find((i) => i.name === e.value);
+    setReadyToAssign(true);
     setAssignedGoTo(choice);
   }
 
@@ -233,7 +235,7 @@ export default function Unassigned({ id }) {
                 <button
                   className={successButtonStyles}
                   onClick={() => handleAssignGoToList()}
-                  disabled={isPosting}
+                  disabled={!readyToAssign}
                 >
                   {isAssigning ? (
                     <ClipLoader size={24} color={"white"} />
