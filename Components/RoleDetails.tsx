@@ -246,69 +246,73 @@ const RoleDetails = ({ id, roleName, goToId }) => {
           </div>
         ) : null}
       </div>
-      <div className={`${boxStyles} ${isViewingRole ? "" : "hidden"}`}>
-        <div className={thStyles}>
-          <label className="px-6 py-3">Name</label>
-          <label className="px-6 py-3">Email</label>
-          <label className="px-6 py-3">Phone Number</label>
-          <label className="px-6 py-3">Action</label>
-        </div>
-        <div className={newRowStyles}>
-          <button
-            className={`${successButtonStyles} disabled:cursor-not-allowed`}
-            onClick={() => handleCreateUserClick()}
-            disabled={noAdding || isCreatingUser}
-          >
-            <PlusIcon className="h-6 w-6" />
-            Add Go-To {roleName}
-          </button>
-        </div>
-        <div className={`${rowStyles} ${isCreatingUser ? "" : "hidden"}`}>
-          <div className={tdStyles}>
-            <input
-              className={inputStyles}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Name"
-            />
+      {isViewingRole ? (
+        <div className={boxStyles}>
+          <div className={thStyles}>
+            <label className="px-6 py-3">Name</label>
+            <label className="px-6 py-3">Email</label>
+            <label className="px-6 py-3">Phone Number</label>
+            <label className="px-6 py-3">Action</label>
           </div>
-          <div className={tdStyles}>
-            {errorsExist ? (
-              <label className={labelStyles}>Invalid Email Address</label>
-            ) : null}
-            <input
-              className={inputStyles}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-            />
-          </div>
-          <div className={tdStyles}>
-            <input
-              className={inputStyles}
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="Phone #"
-            />
-          </div>
-          <div className={lastCreatorTdStyles}>
+          <div className={newRowStyles}>
             <button
-              className={infoButtonStyles}
-              value={phoneNumber}
-              onClick={() => createPerson()}
+              className={`${successButtonStyles} disabled:cursor-not-allowed`}
+              onClick={() => handleCreateUserClick()}
+              disabled={noAdding || isCreatingUser}
             >
-              Save
+              <PlusIcon className="h-6 w-6" />
+              Add Go-To {roleName}
             </button>
-            <XMarkIcon
-              className="h-6 w-6 ml-4 hover:cursor-pointer"
-              onClick={() => setIsCreatingUser(false)}
-            />
           </div>
+          {isCreatingUser ? (
+            <div className={rowStyles}>
+              <div className={tdStyles}>
+                <input
+                  className={inputStyles}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Name"
+                />
+              </div>
+              <div className={tdStyles}>
+                {errorsExist ? (
+                  <label className={labelStyles}>Invalid Email Address</label>
+                ) : null}
+                <input
+                  className={inputStyles}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email"
+                />
+              </div>
+              <div className={tdStyles}>
+                <input
+                  className={inputStyles}
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  placeholder="Phone #"
+                />
+              </div>
+              <div className={lastCreatorTdStyles}>
+                <button
+                  className={infoButtonStyles}
+                  value={phoneNumber}
+                  onClick={() => createPerson()}
+                >
+                  Save
+                </button>
+                <XMarkIcon
+                  className="h-6 w-6 ml-4 hover:cursor-pointer"
+                  onClick={() => setIsCreatingUser(false)}
+                />
+              </div>
+            </div>
+          ) : null}
+          <DndProvider backend={HTML5Backend}>
+            <Container goToId={goToId} roleId={id} setNoAdding={setNoAdding} />
+          </DndProvider>
         </div>
-        <DndProvider backend={HTML5Backend}>
-          <Container goToId={goToId} roleId={id} setNoAdding={setNoAdding} />
-        </DndProvider>
-      </div>
+      ) : null}
     </div>
   );
 };

@@ -58,7 +58,7 @@ export const Person: FC<PersonProps> = ({
   status,
   statusIcon,
 }) => {
-  const { people, setPeople, noEditing, setIsPosting, isPosting, setError } =
+  const { people, setPeople, setIsPosting, isPosting, setError } =
     useGlobalContext();
   const [isHovering, setIsHovering] = useState(false);
   const [newName, setNewName] = useState("");
@@ -310,16 +310,11 @@ export const Person: FC<PersonProps> = ({
           <button className={infoButtonStyles} onClick={() => editPerson()}>
             Save
           </button>
-        ) : (
-          <div
-            className={
-              isHovering ? "flex items-center justfy-content mr-24" : "hidden"
-            }
-          >
+        ) : isHovering ? (
+          <div className="flex items-center justfy-content mr-24">
             <button
               onClick={() => handleEditUser()}
               className="font-medium text-blue-600 dark:text-blue-500 hover:underline disabled:cursor-not-allowed"
-              disabled={noEditing}
             >
               Edit
             </button>
@@ -328,7 +323,7 @@ export const Person: FC<PersonProps> = ({
               className="h-5 w-5 mx-6 hover:text-red-700 text-red-500"
             />
           </div>
-        )}
+        ) : null}
         {status && statusIcon ? (
           <div
             style={{ width: "7rem" }}
