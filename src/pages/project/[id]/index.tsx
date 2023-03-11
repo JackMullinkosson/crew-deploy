@@ -28,7 +28,7 @@ export default function Page() {
   async function getGoToByProjectId() {
     try {
       let res = await fetch(
-        `${process.env.BASE_URL}api/getGoToByProjectId/${id}`,
+        `${process.env.BASE_URL}/api/getGoToByProjectId/${id}`,
         {
           method: "GET",
           headers: {
