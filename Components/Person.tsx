@@ -259,14 +259,12 @@ export const Person: FC<PersonProps> = ({
     <div
       ref={ref}
       style={{ opacity }}
-      className={` ${rowStyles} relative hover:cursor-pointer ${
-        isPosting ? "hover:cursor-not-allowed" : ""
-      }`}
+      className="relative hover:cursor-pointer flex flex-row py-4 bg-gray-50 w-full justify-between border shrink-0"
       data-handler-id={handlerId}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      <div className={`${tdStyles} ml-12`}>
+      <div className="ml-12 mx-4 flex flex-col w-full justify-center items-center">
         <label className={labelStyles}>Name</label>
         <div className="font-bold absolute left-2 bottom-4">
           {arrOfPersonnel[id]}

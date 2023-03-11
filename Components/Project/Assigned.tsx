@@ -311,7 +311,9 @@ const Assigned = ({ id }) => {
           ) : (
             <div className={newRowStyles}>
               <button
-                className={`${successButtonStyles} flex flex-row items-center`}
+                className={
+                  "flex flex-row items-center flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed"
+                }
                 disabled={isCreatingRow}
                 onClick={() => setIsCreatingRow(true)}
               >
@@ -324,7 +326,7 @@ const Assigned = ({ id }) => {
         {crewedUp ? null : (
           <div className="w-5/6 py-6 flex flex-row justify-between items-center">
             <button
-              className={`${infoButtonStyles} w-1/2`}
+              className="w-1/2 py-1 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-m border-4 text-white px-2 rounded disabled:cursor-not-allowed"
               onClick={() => handleCrewUp()}
               disabled={!!isPosting}
             >

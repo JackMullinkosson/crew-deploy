@@ -219,9 +219,7 @@ const RoleDetails = ({ id, roleName, goToId }) => {
         {isHovering ? (
           <TrashIcon
             onClick={(e) => handleDeleteRoleClick(e)}
-            className={`h-6 w-6 hover:cursor-pointer hover:text-red-700 text-red-500 mr-6 ${
-              isPosting ? "hover:cursor-not-allowed" : ""
-            }`}
+            className="h-6 w-6 hover:cursor-pointer hover:text-red-700 text-red-500 mr-6"
           />
         ) : null}
         {isConfirmingDelete ? (
@@ -256,7 +254,7 @@ const RoleDetails = ({ id, roleName, goToId }) => {
           </div>
           <div className={newRowStyles}>
             <button
-              className={`${successButtonStyles} disabled:cursor-not-allowed`}
+              className={successButtonStyles}
               onClick={() => handleCreateUserClick()}
               disabled={noAdding || isCreatingUser}
             >
