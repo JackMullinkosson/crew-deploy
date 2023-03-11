@@ -42,7 +42,7 @@ const NewProjectForm = () => {
 
   useEffect(() => {
     if (!user && !error && !isLoading) {
-      window.location.assign("http://localhost:3000/api/auth/login");
+      window.location.assign(`${process.env.BASE_URL}/api/auth/login`);
     }
   }, [user, error, isLoading]);
 

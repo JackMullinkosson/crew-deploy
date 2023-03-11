@@ -34,7 +34,7 @@ export default function Page() {
   async function getProjectById() {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/getProjectById/${id}`,
+        `${process.env.BASE_URL}/api/getProjectById/${id}`,
         {
           method: "GET",
           headers: {
@@ -56,7 +56,7 @@ export default function Page() {
   async function getPersonById() {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/getPersonById/${person}`,
+        `${process.env.BASE_URL}/api/getPersonById/${person}`,
         {
           method: "GET",
           headers: {

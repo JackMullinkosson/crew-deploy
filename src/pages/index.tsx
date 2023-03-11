@@ -46,7 +46,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!user && !error && !isLoading) {
-      window.location.assign("http://localhost:3000/api/auth/login");
+      window.location.assign(`${process.env.AUTH0_BASE_URL}/api/auth/login`);
     }
   }, [user, error, isLoading]);
 

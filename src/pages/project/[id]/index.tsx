@@ -6,7 +6,6 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { useRouter } from "next/router";
-const BASE_URL = "http://localhost:3000/";
 
 export default function Page() {
   const { user, isLoading, error } = useUser();
@@ -17,7 +16,7 @@ export default function Page() {
 
   useEffect(() => {
     if (!user && !error && !isLoading) {
-      window.location.assign("http://localhost:3000/api/auth/login");
+      window.location.assign(`${process.env.BASE_URL}/api/auth/login`);
     }
   }, [user, error, isLoading]);
 
@@ -28,12 +27,15 @@ export default function Page() {
 
   async function getGoToByProjectId() {
     try {
-      let res = await fetch(`${BASE_URL}api/getGoToByProjectId/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      let res = await fetch(
+        `${process.env.BASE_URL}api/getGoToByProjectId/${id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const test = await res.json();
       if (test) {
         setIsAssigned(true);
