@@ -46,7 +46,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!user && !error && !isLoading) {
-      window.location.assign(`${process.env.AUTH0_BASE_URL}/api/auth/login`);
+      window.location.assign(`${process.env.BASE_URL}/api/auth/login`);
     }
   }, [user, error, isLoading]);
 
