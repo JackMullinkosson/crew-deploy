@@ -8,13 +8,26 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  function sendMail(mailOptions) {
+    return new Promise((resolve, reject) => {
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(info);
+        }
+      });
+    });
+  }
+
   try {
     const { status, statusIcon, id, people, roleId, ownerId, project } =
       req.body;
-    console.log(req.body);
+
     const user = await prisma.user.findFirst({
       where: { id: ownerId },
     });
+
     const person = await prisma.person.update({
       where: {
         id: id,
@@ -24,6 +37,7 @@ export default async function handler(
         statusIcon: parseInt(statusIcon),
       },
     });
+
     if (status === "Declined") {
       for (const person of people) {
         if (
@@ -51,13 +65,22 @@ export default async function handler(
             const mailOptions = {
               from: email,
               to: person.email,
-            };
-            transporter.sendMail({
-              ...mailOptions,
               subject: `${user.name} sent you a job offer on Crew Up!`,
               text: `Dear ${person.name}, ${user.name} has sent you a job offer for the project ${project.name}. Open up this link: ${process.env.BASE_URL}/project/${project.id}/${person.id} for more details and to confirm or decline the offer.`,
               html: `<h4>Dear ${person.name},</h4><p>${user.name} has sent you a job offer for the project ${project.name}. <span><a href="${process.env.BASE_URL}/project/${project.id}/${person.id}">Click here</a></span> for more details and to confirm or decline the offer.</p>`,
-            });
+            };
+            try {
+              const info = await sendMail(mailOptions);
+              console.log(
+                `Email sent to ${person.email} with info: ${JSON.stringify(
+                  info
+                )}`
+              );
+            } catch (error) {
+              console.error(
+                `Error sending email to ${person.email}: ${error.message}`
+              );
+            }
           }
         }
       }

@@ -65,7 +65,6 @@ export default function Unassigned({ id }) {
 
   function handleChoice(e) {
     const choice = goTos.find((i) => i.name === e.value);
-    setReadyToAssign(true);
     setAssignedGoTo(choice);
   }
 
@@ -154,6 +153,7 @@ export default function Unassigned({ id }) {
     } catch (error) {
       console.error(error);
     } finally {
+      setReadyToAssign(true);
       setIsPosting(false);
     }
   }
