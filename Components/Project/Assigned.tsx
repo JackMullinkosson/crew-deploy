@@ -12,23 +12,6 @@ import { ClipLoader } from "react-spinners";
 import RoleDetails from "../RoleDetails";
 import ProjectDetails from "./ProjectDetails";
 
-const newRowStyles =
-  "flex flex-row items-center py-4 mt-2 w-full justify-between";
-const addRowStyles =
-  "flex flex-row w-1/4 items-center mt-2 justify-between bg-white border px-4 py-4 mb-4";
-const inputStyles =
-  "appearance-none w-1/2 bg-gray-200 text-gray-500 border border-black-500 rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white";
-const successLabelStyles =
-  "h-6 uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 flex flex-row items-center text-teal-500";
-const dangerLabelStyles =
-  "block uppercase text-red-700 text-xs font-bold mb-2 flex flex-row items-center";
-const successButtonStyles =
-  "flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed";
-const infoButtonStyles =
-  "py-1 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-m border-4 text-white px-2 rounded disabled:cursor-not-allowed";
-const toastStyles =
-  "flex items-center w-full max-w-xs p-4 bg-white rounded-lg shadow-lg shadow-blue-400";
-
 const Assigned = ({ id }) => {
   const {
     people,
@@ -229,7 +212,7 @@ const Assigned = ({ id }) => {
     <main className="flex justify-center px-16 flex-col py-12 lg:py-16 lg:px-24">
       {showToast ? (
         <div className="fixed top-20 left-1/3">
-          <div className={toastStyles}>
+          <div className="flex items-center w-full max-w-xs p-4 bg-white rounded-lg shadow-lg shadow-blue-400">
             <CheckIcon className="h-8 w-8 text-green-500" />
             <p>Success! Offers have been sent.</p>
             <XMarkIcon
@@ -248,18 +231,18 @@ const Assigned = ({ id }) => {
       )}
       <div className="w-5/6 pt-3 pb-1">
         <>
-          <div className={newRowStyles}>
+          <div className="flex flex-row items-center py-4 mt-2 w-full justify-between">
             {isPosting ? (
               <div className="flex items-center">
                 <ClipLoader size={35} color={"red"} />
               </div>
             ) : error ? (
-              <label className={dangerLabelStyles}>
+              <label className="block uppercase text-red-700 text-xs font-bold mb-2 flex flex-row items-center">
                 Error occurred. Please refresh the page
                 <ExclamationCircleIcon className="h-6 w-6 items-center" />
               </label>
             ) : (
-              <label className={successLabelStyles}>
+              <label className="h-6 uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 flex flex-row items-center text-teal-500">
                 All changes saved
                 <CheckIcon className="h-6 w-6 items-center" />
               </label>
@@ -289,15 +272,15 @@ const Assigned = ({ id }) => {
           )}
 
           {isCreatingRow ? (
-            <div className={addRowStyles}>
+            <div className="flex flex-row w-1/4 items-center mt-2 justify-between bg-white border px-4 py-4 mb-4">
               <input
-                className={inputStyles}
+                className="appearance-none w-1/2 bg-gray-200 text-gray-500 border border-black-500 rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white"
                 value={name}
                 placeholder="Role Name"
                 onChange={(e) => setName(e.target.value)}
               />
               <button
-                className={successButtonStyles}
+                className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed"
                 onClick={() => addRole()}
                 disabled={isPosting}
               >
@@ -309,11 +292,9 @@ const Assigned = ({ id }) => {
               />
             </div>
           ) : (
-            <div className={newRowStyles}>
+            <div className="flex flex-row items-center py-4 mt-2 w-full justify-between">
               <button
-                className={
-                  "flex flex-row items-center flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed"
-                }
+                className="flex flex-row items-center flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed"
                 disabled={isCreatingRow}
                 onClick={() => setIsCreatingRow(true)}
               >

@@ -13,19 +13,6 @@ import RoleDetails from "../../../../Components/RoleDetails";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/router";
 
-const successButtonStyles =
-  "mr-2 flex items-center flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed";
-const newRowStyles =
-  "flex flex-row items-center py-4 mb-4 w-full justify-between";
-const addRowStyles =
-  "flex flex-row w-1/4 items-center justify-between bg-white py-1 mb-4";
-const inputStyles =
-  "w-1/2 appearance-none bg-gray-200 text-gray-500 border border-black-500 rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white";
-const successLabelStyles =
-  "h-6 uppercase tracking-wide text-gray-700 text-xs font-bold flex flex-row items-center text-teal-500";
-const dangerLabelStyles =
-  "block uppercase text-red-700 text-xs font-bold mb-2 flex flex-row items-center";
-
 export default withPageAuthRequired(function GoTo() {
   const router = useRouter();
   const { id } = router.query;
@@ -126,8 +113,11 @@ export default withPageAuthRequired(function GoTo() {
       <h1 className="text-4xl py-4">{goToLoading ? "Loading..." : goTo}</h1>
       {goToLoading ? (
         <>
-          <div className={newRowStyles}>
-            <button className={successButtonStyles} disabled={true}>
+          <div className="flex flex-row items-center py-4 mb-4 w-full justify-between">
+            <button
+              className="mr-2 flex items-center flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed"
+              disabled={true}
+            >
               <PlusIcon className="h-6 w-6" />
               Add Role
             </button>
@@ -140,18 +130,18 @@ export default withPageAuthRequired(function GoTo() {
         </>
       ) : (
         <div>
-          <div className={addRowStyles}>
+          <div className="flex flex-row w-1/4 items-center justify-between bg-white py-1 mb-4">
             {isPosting ? (
               <div className="flex items-center">
                 <ClipLoader size={35} color={"red"} />
               </div>
             ) : error ? (
-              <label className={dangerLabelStyles}>
+              <label className="block uppercase text-red-700 text-xs font-bold mb-2 flex flex-row items-center">
                 Error occurred. Please refresh the page
                 <ExclamationCircleIcon className="h-6 w-6 items-center" />
               </label>
             ) : (
-              <label className={successLabelStyles}>
+              <label className="h-6 uppercase tracking-wide text-gray-700 text-xs font-bold flex flex-row items-center text-teal-500">
                 All changes saved
                 <CheckIcon className="h-6 w-6 items-center" />
               </label>
@@ -171,12 +161,15 @@ export default withPageAuthRequired(function GoTo() {
           {isCreatingRow ? (
             <div className="border py-6 mt-4 px-4 flex flex-row w-1/4 items-center justify-between bg-white py-1 mb-4">
               <input
-                className={inputStyles}
+                className="w-1/2 appearance-none bg-gray-200 text-gray-500 border border-black-500 rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white"
                 value={name}
                 placeholder="Role Name"
                 onChange={(e) => setName(e.target.value)}
               />
-              <button className={successButtonStyles} onClick={() => addRole()}>
+              <button
+                className="mr-2 flex items-center flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed"
+                onClick={() => addRole()}
+              >
                 Add
               </button>
               <XMarkIcon
@@ -185,7 +178,7 @@ export default withPageAuthRequired(function GoTo() {
               />
             </div>
           ) : (
-            <div className={newRowStyles}>
+            <div className="flex flex-row items-center py-4 mb-4 w-full justify-between">
               <button
                 className="flex flex-row items-center mr-2 flex items-center flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed"
                 disabled={isCreatingRow}

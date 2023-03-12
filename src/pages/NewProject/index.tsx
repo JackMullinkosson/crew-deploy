@@ -31,14 +31,6 @@ const NewProjectForm = () => {
   const [postRequestNotReady, setPostRequestNotReady] = useState(true);
   const [isPosting, setIsPosting] = useState(false);
   const router = useRouter();
-  const inputStyles =
-    "appearance-none w-full bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white";
-  const borderStyles =
-    "bg-gray-200 text-gray-700 border border-500 rounded focus:outline-none focus:bg-white";
-  const labelStyles =
-    "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2";
-  const successButtonStyles =
-    "flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed items-center w-40";
 
   useEffect(() => {
     if (!user && !error && !isLoading) {
@@ -159,39 +151,47 @@ const NewProjectForm = () => {
         {projectName === "" ? "New Project" : projectName}
       </h1>
       <div className="w-full">
-        <label className={labelStyles}>Project Title</label>
+        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          Project Title
+        </label>
         <input
           onChange={(e) => setProjectName(e.target.value)}
           value={projectName}
           type="text"
-          className={inputStyles}
+          className="appearance-none w-full bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
         />
       </div>
       <div className="w-full py-4">
-        <label className={labelStyles}>Log Line</label>
+        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          Log Line
+        </label>
         <textarea
           onChange={(e) => setLogLine(e.target.value)}
           value={logLine}
-          className={inputStyles}
+          className="appearance-none w-full bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
         ></textarea>
       </div>
       <div className="w-full flex">
         <div>
-          <label className={labelStyles}>Start Date</label>
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            Start Date
+          </label>
           <input
             type="date"
             onChange={(e) => setStartDate(e.target.value)}
             value={startDate}
-            className={borderStyles}
+            className="bg-gray-200 text-gray-700 border border-500 rounded focus:outline-none focus:bg-white"
           ></input>
         </div>
         <div className="px-6">
-          <label className={labelStyles}>End Date</label>
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            End Date
+          </label>
           <input
             type="date"
             onChange={(e) => setEndDate(e.target.value)}
             value={endDate}
-            className={borderStyles}
+            className="bg-gray-200 text-gray-700 border border-500 rounded focus:outline-none focus:bg-white"
           ></input>
         </div>
       </div>
@@ -206,7 +206,9 @@ const NewProjectForm = () => {
                 Day {i + 1}
               </h4>
               <div>
-                <label className={labelStyles}>Call Time:</label>
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Call Time:
+                </label>
                 <TimePicker
                   allowEmpty={false}
                   showSecond={false}
@@ -225,7 +227,9 @@ const NewProjectForm = () => {
                 />
               </div>
               <div>
-                <label className={labelStyles}>Wrap Time:</label>
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Wrap Time:
+                </label>
                 <TimePicker
                   allowEmpty={false}
                   showSecond={false}
@@ -244,7 +248,9 @@ const NewProjectForm = () => {
                 />
               </div>
               <div>
-                <label className={labelStyles}>Location:</label>
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Location:
+                </label>
                 <input
                   value={locations[i]}
                   type="text"
@@ -257,7 +263,9 @@ const NewProjectForm = () => {
                 />
               </div>
               <div>
-                <label className={labelStyles}>Day length:</label>
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Day length:
+                </label>
                 <h4
                   style={{
                     display:
@@ -277,7 +285,7 @@ const NewProjectForm = () => {
       <div className="w-full py-6">
         <button
           type="submit"
-          className={successButtonStyles}
+          className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed items-center w-40"
           disabled={postRequestNotReady}
         >
           {isPosting ? (

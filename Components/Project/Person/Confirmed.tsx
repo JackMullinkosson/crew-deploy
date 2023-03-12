@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { useGlobalContext } from "../../../Context/store";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-const dangerButtonStyles =
-  "w-1/4 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-lg border-4 text-white py-1 px-2 rounded";
 
 const Confirmed = ({ ownerId, project, roleId, personId, goToId }) => {
   const { people, setPeople } = useGlobalContext();
@@ -69,7 +67,7 @@ const Confirmed = ({ ownerId, project, roleId, personId, goToId }) => {
     <div className="w-3/4 py-6 flex flex-row items-center justify-evenly relative">
       <p>Thanks! You have been confirmed for this project.</p>
       <button
-        className={dangerButtonStyles}
+        className="w-1/4 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-lg border-4 text-white py-1 px-2 rounded"
         onClick={() => setIsConfirmingDecline(true)}
       >
         Cancel

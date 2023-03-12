@@ -10,15 +10,6 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { useGlobalContext } from "../../Context/store";
 import { useRouter } from "next/navigation";
 
-const successButtonStyles =
-  "bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 border-4 text-white py-1 px-1 rounded disabled:cursor-not-allowed items-center w-1/3 text-center";
-const rowStyles =
-  "space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0 mb-6 lg:mb-12";
-const newBoxStyles =
-  "flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:bg-gray-100";
-const inputStyles =
-  "appearance-none w-3/4 bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white";
-
 interface project {
   name: String;
   id: Number;
@@ -163,14 +154,14 @@ export default function Home() {
                   What&apos;s your name?
                 </h1>
                 <input
-                  className={inputStyles}
+                  className="appearance-none w-3/4 bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Harrison Ford"
                 />
                 <button
                   disabled={name.length < 1}
-                  className={successButtonStyles}
+                  className="bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 border-4 text-white py-1 px-1 rounded disabled:cursor-not-allowed items-center w-1/3 text-center"
                   onClick={() => createUser()}
                 >
                   {isPosting ? (
@@ -191,9 +182,9 @@ export default function Home() {
                 Active Projects
               </h2>
             </div>
-            <div className={rowStyles}>
+            <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0 mb-6 lg:mb-12">
               <div
-                className={`${newBoxStyles} ${
+                className={`"flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:bg-gray-100" ${
                   dbUser === null
                     ? "pointer-events-none"
                     : "hover:cursor-pointer"
@@ -217,9 +208,9 @@ export default function Home() {
                 Go-To Lists
               </h2>
             </div>
-            <div className={rowStyles}>
+            <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0 mb-6 lg:mb-12">
               <div
-                className={`${newBoxStyles} ${
+                className={`"flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:bg-gray-100" ${
                   dbUser === null
                     ? "pointer-events-none"
                     : "hover:cursor-pointer"

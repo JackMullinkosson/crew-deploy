@@ -4,10 +4,6 @@ import { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { useGlobalContext } from "../../../Context/store";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-const dangerButtonStyles =
-  "w-1/4 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-lg border-4 text-white py-1 px-2 rounded";
-const successButtonStyles =
-  "w-1/4 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-lg border-4 text-white py-1 px-2 rounded";
 
 const ResponseButtons = ({ personId, project, ownerId, roleId, goToId }) => {
   const { people, setPeople } = useGlobalContext();
@@ -87,11 +83,14 @@ const ResponseButtons = ({ personId, project, ownerId, roleId, goToId }) => {
 
   return (
     <div className="w-3/4 py-6 flex flex-row items-center justify-evenly relative">
-      <button className={successButtonStyles} onClick={(e) => handleClick(e)}>
+      <button
+        className="w-1/4 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-lg border-4 text-white py-1 px-2 rounded"
+        onClick={(e) => handleClick(e)}
+      >
         {isConfirming ? <ClipLoader size={21} color={"white"} /> : "Confirm"}
       </button>
       <button
-        className={dangerButtonStyles}
+        className="w-1/4 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-lg border-4 text-white py-1 px-2 rounded"
         onClick={() => setIsConfirmingDecline(true)}
       >
         Decline

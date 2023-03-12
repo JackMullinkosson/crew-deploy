@@ -5,8 +5,6 @@ import {
   CheckIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/24/solid";
-const toastStyles =
-  "flex items-center w-full max-w-xs p-4 bg-white rounded-lg shadow-lg shadow-blue-400";
 
 const Toast = ({ status }) => {
   const [showToast, setShowToast] = useState(true);
@@ -21,7 +19,7 @@ const Toast = ({ status }) => {
     <>
       {showToast ? (
         <div className="fixed top-20 left-1/3">
-          <div className={toastStyles}>
+          <div className="flex items-center w-full max-w-xs p-4 bg-white rounded-lg shadow-lg shadow-blue-400">
             {status === "Confirmed" ? (
               <>
                 <CheckIcon className="h-8 w-8 text-green-500" />

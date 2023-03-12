@@ -8,26 +8,6 @@ import { useGlobalContext } from "../Context/store";
 import { PlusIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import EmailValidator from "email-validator";
 
-const boxStyles =
-  "flex flex-col justify-center items-center mx-4 w-lg border rounded";
-const thStyles =
-  "flex flex-row py-2 bg-gray-200 rounded w-full justify-between";
-const newRowStyles =
-  "flex flex-row py-2 bg-gray-50 w-full justify-between border";
-const rowStyles = "flex flex-row py-4 bg-gray-50 w-full justify-between border";
-const tdStyles = "mx-4 flex justify-center items-center flex-col";
-const successButtonStyles =
-  "mx-4 mt-4 flex items-center flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded my-2 disabled:cursor-not-allowed";
-const infoButtonStyles =
-  "flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded";
-const dangerButtonStyles =
-  "flex-shrink-0 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-sm border-4 text-white py-1 px-2 rounded";
-const inputStyles =
-  "appearance-none w-full bg-gray-200 text-gray-500 border border-black-500 rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white";
-const lastCreatorTdStyles = "mx-4 flex justify-center items-center flex-row";
-const labelStyles =
-  "block uppercase tracking-wide text-red-700 text-xs font-bold mb-2";
-
 const RoleDetails = ({ id, roleName, goToId }) => {
   const {
     roles,
@@ -235,7 +215,7 @@ const RoleDetails = ({ id, roleName, goToId }) => {
                 personnel.
               </p>
               <button
-                className={dangerButtonStyles}
+                className="flex-shrink-0 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-sm border-4 text-white py-1 px-2 rounded"
                 onClick={(e) => handleDeleteConfirmed(e)}
               >
                 Delete
@@ -245,16 +225,16 @@ const RoleDetails = ({ id, roleName, goToId }) => {
         ) : null}
       </div>
       {isViewingRole ? (
-        <div className={boxStyles}>
-          <div className={thStyles}>
+        <div className="flex flex-col justify-center items-center mx-4 w-lg border rounded">
+          <div className="flex flex-row py-2 bg-gray-200 rounded w-full justify-between">
             <label className="px-6 py-3">Name</label>
             <label className="px-6 py-3">Email</label>
             <label className="px-6 py-3">Phone Number</label>
             <label className="px-6 py-3">Action</label>
           </div>
-          <div className={newRowStyles}>
+          <div className="flex flex-row py-2 bg-gray-50 w-full justify-between border">
             <button
-              className={successButtonStyles}
+              className="mx-4 mt-4 flex items-center flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded my-2 disabled:cursor-not-allowed"
               onClick={() => handleCreateUserClick()}
               disabled={isCreatingUser}
             >
@@ -263,37 +243,39 @@ const RoleDetails = ({ id, roleName, goToId }) => {
             </button>
           </div>
           {isCreatingUser ? (
-            <div className={rowStyles}>
-              <div className={tdStyles}>
+            <div className="flex flex-row py-4 bg-gray-50 w-full justify-between border">
+              <div className="mx-4 flex justify-center items-center flex-col">
                 <input
-                  className={inputStyles}
+                  className="appearance-none w-full bg-gray-200 text-gray-500 border border-black-500 rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Name"
                 />
               </div>
-              <div className={tdStyles}>
+              <div className="mx-4 flex justify-center items-center flex-col">
                 {errorsExist ? (
-                  <label className={labelStyles}>Invalid Email Address</label>
+                  <label className="block uppercase tracking-wide text-red-700 text-xs font-bold mb-2">
+                    Invalid Email Address
+                  </label>
                 ) : null}
                 <input
-                  className={inputStyles}
+                  className="appearance-none w-full bg-gray-200 text-gray-500 border border-black-500 rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
                 />
               </div>
-              <div className={tdStyles}>
+              <div className="mx-4 flex justify-center items-center flex-col">
                 <input
-                  className={inputStyles}
+                  className="appearance-none w-full bg-gray-200 text-gray-500 border border-black-500 rounded py-2 px-1 mb-1 leading-tight focus:outline-none focus:bg-white"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   placeholder="Phone #"
                 />
               </div>
-              <div className={lastCreatorTdStyles}>
+              <div className="mx-4 flex justify-center items-center flex-row">
                 <button
-                  className={infoButtonStyles}
+                  className="flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded"
                   value={phoneNumber}
                   onClick={() => createPerson()}
                 >
