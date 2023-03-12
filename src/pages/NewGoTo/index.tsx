@@ -129,7 +129,7 @@ const NewGoToForm = () => {
     <>
       <form
         onSubmit={submitList}
-        className="py-14 lg:py-20 px-4 mx-auto max-w-screen-md"
+        className="py-18 lg:py-28 px-4 mx-auto max-w-screen-md"
       >
         <h1 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
           {listName === "" ? "New Go-To List" : listName}
