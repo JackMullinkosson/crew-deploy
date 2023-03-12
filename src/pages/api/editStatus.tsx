@@ -1,25 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../prisma/client";
-import { transporter } from "../../../Components/NodeMailer";
-
 const email = process.env.EMAIL;
+const sgMail = require("@sendgrid/mail");
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  function sendMail(mailOptions) {
-    return new Promise((resolve, reject) => {
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(info);
-        }
-      });
-    });
-  }
-
   try {
     const { status, statusIcon, id, people, roleId, ownerId, project } =
       req.body;
@@ -62,25 +49,22 @@ export default async function handler(
                 statusIcon: 2,
               },
             });
-            const mailOptions = {
-              from: email,
+            sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+            const msg = {
               to: person.email,
+              from: email,
               subject: `${user.name} sent you a job offer on Crew Up!`,
               text: `Dear ${person.name}, ${user.name} has sent you a job offer for the project ${project.name}. Open up this link: ${process.env.BASE_URL}/project/${project.id}/${person.id} for more details and to confirm or decline the offer.`,
               html: `<h4>Dear ${person.name},</h4><p>${user.name} has sent you a job offer for the project ${project.name}. <span><a href="${process.env.BASE_URL}/project/${project.id}/${person.id}">Click here</a></span> for more details and to confirm or decline the offer.</p>`,
             };
-            try {
-              const info = await sendMail(mailOptions);
-              console.log(
-                `Email sent to ${person.email} with info: ${JSON.stringify(
-                  info
-                )}`
-              );
-            } catch (error) {
-              console.error(
-                `Error sending email to ${person.email}: ${error.message}`
-              );
-            }
+            sgMail
+              .send(msg)
+              .then(() => {
+                console.log("Email sent");
+              })
+              .catch((error) => {
+                console.error(error);
+              });
           }
         }
       }
