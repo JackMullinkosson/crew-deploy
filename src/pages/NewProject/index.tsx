@@ -145,7 +145,7 @@ const NewProjectForm = () => {
   return (
     <form
       onSubmit={submitProject}
-      className="py-14 lg:py-22 px-4 mx-auto max-w-screen-md"
+      className="py-18 lg:py-28 px-4 mx-auto max-w-screen-md"
     >
       <h1 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
         {projectName === "" ? "New Project" : projectName}

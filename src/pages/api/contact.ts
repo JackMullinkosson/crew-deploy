@@ -17,25 +17,52 @@ export default async function handler(
       where: { id: ownerId },
     });
 
-    await people.forEach((person) => {
-      const hasLowerOrder = people.some(
-        (otherPerson) =>
-          otherPerson.roleId === person.roleId &&
-          otherPerson.order < person.order
-      );
-      if (!hasLowerOrder) {
-        const mailOptions = {
-          from: email,
-          to: person.email,
-        };
-        transporter.sendMail({
-          ...mailOptions,
-          subject: `${user.name} sent you a job offer on Crew Up!`,
-          text: `Dear ${person.name}, ${user.name} has sent you a job offer for the project ${project.name}. Open up this link: ${process.env.BASE_URL}/project/${project.id}/${person.id} for more details and to confirm or decline the offer.`,
-          html: `<h4>Dear ${person.name},</h4><p>${user.name} has sent you a job offer for the project ${project.name}. <span><a href="${process.env.BASE_URL}/project/${project.id}/${person.id}">Click here</a></span> for more details and to confirm or decline the offer.</p>`,
+    const sendEmails = () => {
+      const promises = people.map((person) => {
+        return new Promise((resolve, reject) => {
+          const hasLowerOrder = people.some(
+            (otherPerson) =>
+              otherPerson.roleId === person.roleId &&
+              otherPerson.order < person.order
+          );
+          if (!hasLowerOrder) {
+            const mailOptions = {
+              from: email,
+              to: person.email,
+            };
+            transporter.sendMail(
+              {
+                ...mailOptions,
+                subject: `${user.name} sent you a job offer on Crew Up!`,
+                text: `Dear ${person.name}, ${user.name} has sent you a job offer for the project ${project.name}. Open up this link: ${process.env.BASE_URL}/project/${project.id}/${person.id} for more details and to confirm or decline the offer.`,
+                html: `<h4>Dear ${person.name},</h4><p>${user.name} has sent you a job offer for the project ${project.name}. <span><a href="${process.env.BASE_URL}/project/${project.id}/${person.id}">Click here</a></span> for more details and to confirm or decline the offer.</p>`,
+              },
+              (error, info) => {
+                if (error) {
+                  reject(error);
+                } else {
+                  resolve(info);
+                }
+              }
+            );
+          } else {
+            resolve(null);
+          }
         });
-      }
-    });
+      });
+      return Promise.all(promises);
+    };
+
+    sendEmails()
+      .then((results) => {
+        console.log(
+          "Emails sent:",
+          results.filter((result) => result !== null).length
+        );
+      })
+      .catch((error) => {
+        console.error("Error sending emails:", error);
+      });
 
     await prisma.project.update({
       where: {
