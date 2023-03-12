@@ -12,17 +12,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-  purge: {
-    content:  [
-      './src/**/*.html',
-      './src/**/*.ts',
-      './src/**/*.tsx',
-    ],
-    safelist: [
-      {
-        pattern: /./,
-        variants: ['sm', 'md', 'lg', 'xl', '2xl'], 
-      },
-    ]
-  },
 }

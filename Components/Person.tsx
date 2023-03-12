@@ -14,16 +14,6 @@ import {
   CheckCircleIcon,
 } from "@heroicons/react/24/solid";
 
-const rowStyles =
-  "flex flex-row py-4 bg-gray-50 w-full justify-between border shrink-0";
-const labelStyles =
-  "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2";
-const tdStyles = "mx-4 flex flex-col w-full justify-center items-center";
-const infoButtonStyles =
-  "py-1 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white px-2 rounded";
-const inputStyles =
-  "py-1 appearance-none w-fit bg-gray-200 text-gray-500 border border-black-500 rounded px-1 mb-1 leading-tight focus:outline-none focus:bg-white";
-
 export interface PersonProps {
   id: number;
   name: string;
@@ -265,7 +255,9 @@ export const Person: FC<PersonProps> = ({
       onMouseLeave={() => setIsHovering(false)}
     >
       <div className="ml-12 mx-4 flex flex-col w-full justify-center items-center">
-        <label className={labelStyles}>Name</label>
+        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          Name
+        </label>
         <div className="font-bold absolute left-2 bottom-4">
           {arrOfPersonnel[id]}
         </div>
@@ -273,39 +265,46 @@ export const Person: FC<PersonProps> = ({
           <input
             value={newName === "" ? name : newName}
             onChange={(e) => setNewName(e.target.value)}
-            className={inputStyles}
+            className="py-1 appearance-none w-fit bg-gray-200 text-gray-500 border border-black-500 rounded px-1 mb-1 leading-tight focus:outline-none focus:bg-white"
           ></input>
         ) : (
           <div>{name}</div>
         )}
       </div>
-      <div className={tdStyles}>
-        <label className={labelStyles}>Email</label>
+      <div className="mx-4 flex flex-col w-full justify-center items-center">
+        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          Email
+        </label>
         {isEditingUser ? (
           <input
             value={newEmail === "" ? email : newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
-            className={inputStyles}
+            className="py-1 appearance-none w-fit bg-gray-200 text-gray-500 border border-black-500 rounded px-1 mb-1 leading-tight focus:outline-none focus:bg-white"
           ></input>
         ) : (
           <div>{email}</div>
         )}
       </div>
-      <div className={tdStyles}>
-        <label className={labelStyles}>Phone #</label>
+      <div className="mx-4 flex flex-col w-full justify-center items-center">
+        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          Phone #
+        </label>
         {isEditingUser ? (
           <input
             value={newPhoneNumber === "" ? phoneNumber : newPhoneNumber}
             onChange={(e) => setNewPhoneNumber(e.target.value)}
-            className={inputStyles}
+            className="py-1 appearance-none w-fit bg-gray-200 text-gray-500 border border-black-500 rounded px-1 mb-1 leading-tight focus:outline-none focus:bg-white"
           ></input>
         ) : (
           <div>{phoneNumber}</div>
         )}
       </div>
-      <div className={tdStyles}>
+      <div className="mx-4 flex flex-col w-full justify-center items-center">
         {isEditingUser ? (
-          <button className={infoButtonStyles} onClick={() => editPerson()}>
+          <button
+            className="py-1 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white px-2 rounded"
+            onClick={() => editPerson()}
+          >
             Save
           </button>
         ) : isHovering ? (

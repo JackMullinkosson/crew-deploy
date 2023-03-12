@@ -7,8 +7,6 @@ import {
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import { ClipLoader } from "react-spinners";
-const newBoxStyles =
-  "flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:cursor-pointer hover:bg-gray-100";
 
 export const GoToBoxes = ({ goTosLoading, goTos }) => {
   const icons = [
@@ -32,7 +30,7 @@ export const GoToBoxes = ({ goTosLoading, goTos }) => {
               return (
                 <div
                   key={String(i.id)}
-                  className={newBoxStyles}
+                  className="flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:cursor-pointer hover:bg-gray-100"
                   onClick={() => router.push(`/GoTos/${i.id}`)}
                 >
                   <h3 className="text-xl font-bold dark:text-white mr-4">

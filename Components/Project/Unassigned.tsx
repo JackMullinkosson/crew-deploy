@@ -45,12 +45,6 @@ export default function Unassigned({ id }) {
   const [isAssigned, setIsAssigned] = useState(false);
   const [readyToAssign, setReadyToAssign] = useState(false);
   const router = useRouter();
-  const labelStyles =
-    "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2";
-  const dangerLabelStyles =
-    "block uppercase text-red-700 text-xs font-bold mb-2";
-  const successButtonStyles =
-    "flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed";
 
   useEffect(() => {
     if (!dbUser) return;
@@ -192,11 +186,13 @@ export default function Unassigned({ id }) {
           )}
           <div className="w-3/4 py-6 flex flex-row justify-evenly items-center">
             <div>
-              <label className={labelStyles}>Choose Go-To List</label>
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                Choose Go-To List
+              </label>
               {goTosLoading ? null : (
                 <label
                   style={{ display: goTos.length > 0 ? "none" : "block" }}
-                  className={dangerLabelStyles}
+                  className="block uppercase text-red-700 text-xs font-bold mb-2"
                 >
                   You must first{" "}
                   <a
@@ -233,7 +229,7 @@ export default function Unassigned({ id }) {
                   )}
                 </select>
                 <button
-                  className={successButtonStyles}
+                  className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed"
                   onClick={() => handleAssignGoToList()}
                   disabled={!readyToAssign}
                 >

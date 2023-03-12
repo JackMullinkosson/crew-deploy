@@ -5,10 +5,6 @@ import { VideoCameraIcon } from "@heroicons/react/24/solid";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 
-const boxStyles =
-  "border-4 border-black-500 border-4 py-4 pl-4 rounded hover:cursor-pointer hover:bg-gray-100";
-const boxIconStyles = "flex flex-row items-center mb-4 text-center";
-
 export const ProjectBoxes = ({ projects, projectsLoading }) => {
   const router = useRouter();
 
@@ -23,11 +19,11 @@ export const ProjectBoxes = ({ projects, projectsLoading }) => {
           {projects.map((i) => {
             return (
               <div
-                className={boxStyles}
+                className="border-4 border-black-500 border-4 py-4 pl-4 rounded hover:cursor-pointer hover:bg-gray-100"
                 key={String(i.id)}
                 onClick={() => router.push(`/project/${i.id}`)}
               >
-                <div className={boxIconStyles}>
+                <div className="flex flex-row items-center mb-4 text-center">
                   <h3 className="text-xl font-bold dark:text-white mr-4">
                     {i.name}
                   </h3>

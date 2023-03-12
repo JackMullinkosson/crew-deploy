@@ -7,13 +7,6 @@ import { ClipLoader } from "react-spinners";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useGlobalContext } from "../../../Context/store";
 
-const inputStyles =
-  "appearance-none w-full bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white";
-const labelStyles =
-  "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2";
-const successButtonStyles =
-  "flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed items-center w-40";
-
 const NewGoToForm = () => {
   const router = useRouter();
   const { user, isLoading, error } = useUser();
@@ -142,16 +135,20 @@ const NewGoToForm = () => {
           {listName === "" ? "New Go-To List" : listName}
         </h1>
         <div className="w-full">
-          <label className={labelStyles}>List Title</label>
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            List Title
+          </label>
           <input
             onChange={(e) => setListName(e.target.value)}
             value={listName}
             type="text"
-            className={inputStyles}
+            className="appearance-none w-full bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           />
         </div>
         <div className="w-full py-6">
-          <label className={labelStyles}>Department</label>
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            Department
+          </label>
           <div className="flex">
             <select
               className="flex appearance-none bg-gray-200 text-gray-700 border border-black-500 rounded py-3 px-4 pr-12 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -170,7 +167,7 @@ const NewGoToForm = () => {
         <div className="w-full py-2">
           <button
             type="submit"
-            className={successButtonStyles}
+            className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded disabled:cursor-not-allowed items-center w-40"
             disabled={postRequestNotReady}
           >
             {isPosting ? (
