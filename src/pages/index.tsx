@@ -183,19 +183,27 @@ export default function Home() {
               </h2>
             </div>
             <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0 mb-6 lg:mb-12">
-              <div
-                className={`"flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:bg-gray-100" ${
-                  dbUser === null
-                    ? "pointer-events-none"
-                    : "hover:cursor-pointer"
-                }`}
-                onClick={() => router.push("/NewProject")}
-              >
-                <h3 className="text-xl font-bold dark:text-white mr-4">
-                  New Project
-                </h3>
-                <PlusIcon className="h-6 w-6" />
-              </div>
+              {dbUser ? (
+                <div
+                  className="hover:cursor-pointer flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:bg-gray-100"
+                  onClick={() => router.push("/NewProject")}
+                >
+                  <h3 className="text-xl font-bold dark:text-white mr-4">
+                    New Project
+                  </h3>
+                  <PlusIcon className="h-6 w-6" />
+                </div>
+              ) : (
+                <div
+                  className="pointer-events-none flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:bg-gray-100"
+                  onClick={() => router.push("/NewProject")}
+                >
+                  <h3 className="text-xl font-bold dark:text-white mr-4">
+                    New Project
+                  </h3>
+                  <PlusIcon className="h-6 w-6" />
+                </div>
+              )}
               {dbUser ? (
                 <ProjectBoxes
                   projects={projects}
@@ -209,19 +217,27 @@ export default function Home() {
               </h2>
             </div>
             <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0 mb-6 lg:mb-12">
-              <div
-                className={`"flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:bg-gray-100" ${
-                  dbUser === null
-                    ? "pointer-events-none"
-                    : "hover:cursor-pointer"
-                }`}
-                onClick={() => router.push("/NewGoTo")}
-              >
-                <h3 className="text-xl font-bold dark:text-white mr-4">
-                  New Go-To List
-                </h3>
-                <PlusIcon className="h-6 w-6" />
-              </div>
+              {dbUser ? (
+                <div
+                  className="hover:cursor-pointer flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:bg-gray-100"
+                  onClick={() => router.push("/NewGoTo")}
+                >
+                  <h3 className="text-xl font-bold dark:text-white mr-4">
+                    New Go-To List
+                  </h3>
+                  <PlusIcon className="h-6 w-6" />
+                </div>
+              ) : (
+                <div
+                  className="pointer-events-none flex flex-row justify-center items-center center-text border-dashed border-black-500 border-4 py-8 pl-4 rounded hover:bg-gray-100"
+                  onClick={() => router.push("/NewGoTo")}
+                >
+                  <h3 className="text-xl font-bold dark:text-white mr-4">
+                    New Go-To List
+                  </h3>
+                  <PlusIcon className="h-6 w-6" />
+                </div>
+              )}
               {dbUser ? (
                 <GoToBoxes goTos={goTos} goTosLoading={goTosLoading} />
               ) : null}
