@@ -133,7 +133,12 @@ export default function Home() {
     }
   }
 
-  if (isLoading) return <ClipLoader className="h-6 w-6" />;
+  if (isLoading)
+    return (
+      <div className="py-12 lg:py-16 px-16 lg:px-24">
+        <ClipLoader className="h-6 w-6" />
+      </div>
+    );
   if (error)
     return (
       <main className="flex justify-center px-16 flex-col py-12 lg:py-16 lg:px-24">
